@@ -1,0 +1,270 @@
+<!-- Chosen Palette: Smart City Blues -->
+<!-- Application Structure Plan: A thematic, single-page, scrollable application designed to guide citizens through a narrative journey. The flow is structured as: 1. Hero section with key information and a primary Call-to-Action (CTA). 2. A "Why Attend?" section visualizing the seminar's benefits to build interest. 3. An interactive timeline for the event schedule for easy comprehension. 4. A transparent, interactive budget breakdown using a donut chart to build trust. 5. A final registration section. This structure was chosen over a direct report-to-page translation to make the information more digestible, engaging, and action-oriented for a general public audience. -->
+<!-- Visualization & Content Choices: 1. Key Info (Date/Time/Location): Goal: Inform -> Method: Iconography and large text in cards -> Justification: High visibility for critical information. Method: HTML/Tailwind. 2. Expected Effects: Goal: Organize/Inform -> Method: Three-column card layout with icons -> Justification: Breaks down benefits into easily scannable points. Method: HTML/Tailwind. 3. Schedule: Goal: Show Change/Process -> Method: Vertical Timeline -> Justification: More intuitive and visually engaging than a table for a time-based sequence. Method: Structured HTML/Tailwind. 4. Budget: Goal: Inform/Compare (Proportions) -> Method: Interactive Donut Chart -> Interaction: Hover for details -> Justification: Best for showing part-to-whole data, enhancing transparency. Library: Chart.js/Canvas. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동대문구 | 차세대 스마트 교통 체계 세미나</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F0F8FF;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center py-12 px-4 bg-white rounded-xl shadow-lg mb-12 border-4 border-[#004AAD]">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#004AAD] mb-2">동대문구민과 함께하는</h1>
+            <h2 class="text-5xl md:text-6xl font-black text-[#0094D1] mb-6">'차세대 스마트 교통 체계' 세미나</h2>
+            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+                미래 교통 기술의 현재를 공유하고 동대문구의 스마트한 내일을 함께 그리는 자리에 시민 여러분을 초대합니다.
+            </p>
+        </header>
+
+        <main class="space-y-16">
+            <section id="details" class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-center text-[#004AAD] mb-8">세미나 핵심 정보</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center justify-center p-4 rounded-lg bg-blue-50 border border-blue-200">
+                        <span class="text-5xl mb-3">🗓️</span>
+                        <h3 class="text-xl font-bold text-[#004AAD] mb-1">언제?</h3>
+                        <p class="text-lg text-gray-800">2025년 11월 1일 (토)</p>
+                        <p class="text-lg text-gray-800">14:00 ~ 17:00</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-4 rounded-lg bg-blue-50 border border-blue-200">
+                        <span class="text-5xl mb-3">📍</span>
+                        <h3 class="text-xl font-bold text-[#004AAD] mb-1">어디서?</h3>
+                        <p class="text-lg text-gray-800">동대문구청 2층</p>
+                        <p class="text-lg text-gray-800">다목적강당</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-4 rounded-lg bg-blue-50 border border-blue-200">
+                        <span class="text-5xl mb-3">👥</span>
+                        <h3 class="text-xl font-bold text-[#004AAD] mb-1">누가?</h3>
+                        <p class="text-lg text-gray-800">동대문구민 누구나</p>
+                        <p class="text-sm text-gray-600">(선착순 100명)</p>
+                    </div>
+                </div>
+                 <div class="text-center mt-10">
+                    <a href="#register" class="inline-block bg-[#0094D1] text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg hover:bg-[#004AAD] transition-transform transform hover:scale-105 duration-300">
+                        세미나 사전 신청하기
+                    </a>
+                </div>
+            </section>
+            
+            <section id="goals">
+                <h2 class="text-3xl font-bold text-[#004AAD] mb-4 text-center">왜 이 세미나에 참여해야 할까요?</h2>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-8 text-center">
+                    이번 세미나는 단순한 정보 전달을 넘어, 시민 여러분의 목소리를 듣고 정책에 반영하여 동대문구의 교통 미래를 함께 만들어가기 위한 소중한 첫걸음입니다.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition-shadow">
+                        <h3 class="text-2xl font-bold text-[#0094D1] mb-2">미래 기술 이해</h3>
+                        <p class="text-gray-600">스마트 교통 기술에 대한 정확한 정보를 얻고 우리 생활의 긍정적인 변화를 미리 만나보세요.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition-shadow">
+                        <h3 class="text-2xl font-bold text-[#0094D1] mb-2">정책 참여 기회</h3>
+                        <p class="text-gray-600">동대문구 교통 정책에 대한 의견을 나누고 정책 수립 과정에 목소리를 더할 수 있습니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition-shadow">
+                        <h3 class="text-2xl font-bold text-[#0094D1] mb-2">도시 가치 상승</h3>
+                        <p class="text-gray-600">우리 동네가 더 스마트하고 살기 좋은 곳이 되도록, 동대문구의 도시 브랜드 가치를 함께 높여요.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="schedule" class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-center text-[#004AAD] mb-8">세미나 진행 순서</h2>
+                <div class="relative max-w-3xl mx-auto">
+                    <div class="absolute left-4 md:left-1/2 w-1 bg-[#A6DEEE] h-full transform md:-translate-x-1/2"></div>
+                    <div class="space-y-10">
+                        <div class="flex items-start md:items-center w-full">
+                            <div class="hidden md:block w-1/2 pr-8 text-right"></div>
+                            <div class="relative z-10"> <div class="w-8 h-8 rounded-full bg-[#0094D1] border-4 border-white flex items-center justify-center text-white font-bold">1</div> </div>
+                            <div class="w-full md:w-1/2 pl-6 md:pl-8">
+                                <p class="font-bold text-lg text-[#004AAD]">14:00 ~ 14:20</p>
+                                <p class="text-gray-700 font-semibold">참석자 등록 및 개회</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start md:items-center w-full">
+                            <div class="w-full md:w-1/2 pr-6 md:pr-8 text-left md:text-right">
+                                <p class="font-bold text-lg text-[#004AAD]">14:20 ~ 15:00</p>
+                                <p class="text-gray-700 font-semibold">[주제발표 1] 미래 교통 기술의 동향과 전망</p>
+                                <p class="text-sm text-gray-600">외부 전문가 초빙 강연</p>
+                            </div>
+                            <div class="relative z-10"> <div class="w-8 h-8 rounded-full bg-[#0094D1] border-4 border-white flex items-center justify-center text-white font-bold">2</div> </div>
+                            <div class="hidden md:block w-1/2 pl-8"></div>
+                        </div>
+                        <div class="flex items-start md:items-center w-full">
+                            <div class="hidden md:block w-1/2 pr-8 text-right"></div>
+                            <div class="relative z-10"> <div class="w-8 h-8 rounded-full bg-[#0094D1] border-4 border-white flex items-center justify-center text-white font-bold">3</div> </div>
+                            <div class="w-full md:w-1/2 pl-6 md:pl-8">
+                                <p class="font-bold text-lg text-[#004AAD]">15:00 ~ 15:40</p>
+                                <p class="text-gray-700 font-semibold">[주제발표 2] 동대문구 스마트 교통 시스템 추진 계획</p>
+                                <p class="text-sm text-gray-600">스마트도시과 담당 사무관 발표</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start md:items-center w-full">
+                           <div class="w-full md:w-1/2 pr-6 md:pr-8 text-left md:text-right">
+                                <p class="font-bold text-lg text-[#004AAD]">15:40 ~ 16:20</p>
+                                <p class="text-gray-700 font-semibold">질의응답 및 자유토론</p>
+                                <p class="text-sm text-gray-600">연사와 참석자 간의 소통 시간</p>
+                            </div>
+                            <div class="relative z-10"> <div class="w-8 h-8 rounded-full bg-[#0094D1] border-4 border-white flex items-center justify-center text-white font-bold">4</div> </div>
+                            <div class="hidden md:block w-1/2 pl-8"></div>
+                        </div>
+                        <div class="flex items-start md:items-center w-full">
+                            <div class="hidden md:block w-1/2 pr-8 text-right"></div>
+                            <div class="relative z-10"> <div class="w-8 h-8 rounded-full bg-[#0094D1] border-4 border-white flex items-center justify-center text-white font-bold">5</div> </div>
+                            <div class="w-full md:w-1/2 pl-6 md:pl-8">
+                                <p class="font-bold text-lg text-[#004AAD]">16:20 ~ 16:50</p>
+                                <p class="text-gray-700 font-semibold">체험 프로그램</p>
+                                <p class="text-sm text-gray-600">스마트 신호등, 자율주행 모형 시연</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start md:items-center w-full">
+                           <div class="w-full md:w-1/2 pr-6 md:pr-8 text-left md:text-right">
+                                <p class="font-bold text-lg text-[#004AAD]">16:50 ~ 17:00</p>
+                                <p class="text-gray-700 font-semibold">폐회 및 마무리</p>
+                            </div>
+                             <div class="relative z-10"> <div class="w-8 h-8 rounded-full bg-[#0094D1] border-4 border-white flex items-center justify-center text-white font-bold">6</div> </div>
+                            <div class="hidden md:block w-1/2 pl-8"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="budget" class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-center text-[#004AAD] mb-2">세미나 예산은 어떻게 쓰이나요?</h2>
+                <p class="text-lg text-center text-gray-700 max-w-3xl mx-auto mb-8">
+                    시민 여러분의 세금으로 진행되는 행사인 만큼, 투명한 예산 운영을 통해 최고의 세미나를 준비하겠습니다. 총 예산 1,500,000원은 다음과 같이 사용될 예정입니다.
+                </p>
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+            </section>
+            
+            <section id="register" class="text-center bg-gradient-to-r from-[#004AAD] to-[#0094D1] rounded-xl shadow-lg py-12 px-8">
+                <h2 class="text-4xl font-extrabold text-white mb-4">지금 바로 신청하세요!</h2>
+                <p class="text-xl text-blue-100 mb-6">동대문구의 스마트한 미래를 여는 첫걸음에 함께해주세요.</p>
+                <p class="text-lg text-white font-bold mb-8">사전 신청 기간: 2025년 10월 1일 ~ 10월 25일</p>
+                <a href="#" class="inline-block bg-white text-[#004AAD] text-xl font-bold py-4 px-10 rounded-full shadow-lg hover:bg-blue-100 transition-transform transform hover:scale-105 duration-300">
+                    참가 신청 페이지로 이동
+                </a>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 py-8 border-t border-gray-300">
+            <p class="text-gray-600 font-bold">주최/주관: 동대문구 스마트교통국 스마트도시과</p>
+            <p class="text-gray-500 text-sm mt-2">더 궁금한 점이 있으시면 스마트도시과로 문의해주세요.</p>
+        </footer>
+    </div>
+
+    <script>
+        function wrapLabels(label) {
+            const maxLen = 16;
+            if (typeof label !== 'string' || label.length <= maxLen) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxLen) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        const budgetData = {
+            labels: ['강사료', '참가자 기념품', '운영비 (자료집 등)', '홍보비 (포스터 등)'],
+            datasets: [{
+                label: '예산 분포',
+                data: [500000, 500000, 300000, 200000],
+                backgroundColor: ['#004AAD', '#0094D1', '#78C0E0', '#A6DEEE'],
+                borderColor: '#F0F8FF',
+                borderWidth: 4,
+                hoverOffset: 8
+            }]
+        };
+
+        const budgetConfig = {
+            type: 'doughnut',
+            data: budgetData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 14,
+                                family: "'Noto Sans KR', sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            },
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    const percentage = (context.raw / context.chart.getDatasetMeta(0).total * 100).toFixed(1);
+                                    label += `${new Intl.NumberFormat('ko-KR').format(context.raw)}원 (${percentage}%)`;
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        
+        const budgetChartCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetChartCtx, budgetConfig);
+    </script>
+</body>
+</html>
